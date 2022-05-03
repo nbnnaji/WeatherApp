@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nkechinnaji.simpleweatherapp.databinding.ActivityMainBinding
 import com.nkechinnaji.simpleweatherapp.extensions.visibilityGone
 import com.nkechinnaji.simpleweatherapp.extensions.visibilityVisible
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel : CurrentWeatherViewModel
+    private lateinit var newAdapter: TopHeadLineNewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,17 +25,27 @@ class MainActivity : AppCompatActivity() {
         fetchCurrentWeatherData()
         observeWeatherLiveData()
         showOrHideWeatherDataContainer()
+
+        fetchTopHeadlineNewsData()
+        observeNewsLiveData()
     }
 
     /**
-     * API call
+     * Weather API call
      */
     private fun fetchCurrentWeatherData() {
         viewModel.fetchWeatherData("", "Omaha,Nebraska")
     }
 
     /**
-     * Live data observing
+     * News Api call
+     */
+    private fun fetchTopHeadlineNewsData(){
+        viewModel.fetchTopHealineNews(accessKey = "", query = "weather")
+    }
+
+    /**
+     * Weather Live data observing
      */
     private fun observeWeatherLiveData(){
         viewModel.weatherData.observe(this, Observer { data ->
@@ -50,8 +62,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
     /**
-     * Manage visibility
+     * Manage weather visibility
      */
     private fun showOrHideWeatherDataContainer(){
         viewModel.showData.observe(this, Observer { isDataAvailable ->
@@ -71,5 +84,21 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+    /**
+     * News Live data observing
+     */
+    private fun observeNewsLiveData(){
+        viewModel.headlineNewsData.observe(this, Observer{ data ->
+            if(data == null)return@Observer
+            data.let {
+                if(data.articles!= null) {
+                    newAdapter = TopHeadLineNewsAdapter(it.articles)
+                    binding.newsRecyclerview.adapter = newAdapter
+                }
+            }
+
+        })
+    }
 
 }

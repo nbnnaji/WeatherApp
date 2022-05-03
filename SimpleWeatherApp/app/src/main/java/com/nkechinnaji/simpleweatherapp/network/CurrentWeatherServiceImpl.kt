@@ -1,6 +1,7 @@
 package com.nkechinnaji.simpleweatherapp.network
 
 import com.nkechinnaji.simpleweatherapp.model.CurrentWeatherResponse
+import com.nkechinnaji.simpleweatherapp.model.HeadlineNewsResponse
 import retrofit2.Response
 
 /***
@@ -12,6 +13,12 @@ class CurrentWeatherServiceImpl(val baseService: BaseService): CurrentWeatherSer
         accessKey: String,
         query: String
     ): Response<CurrentWeatherResponse> {
-        return baseService.getEndPointsInterface().getCurrentWeather(access_key = accessKey, query = query)
+        return baseService.getWeatherApiEndpoints().getCurrentWeather(access_key = accessKey, query = query)
+    }
+
+    override suspend fun getNewsHeadline(
+        query: String, accessKey: String
+    ): Response<HeadlineNewsResponse> {
+        return baseService.getNewsApiEndPoints().getHeadlineNews(access_key = accessKey, query = query)
     }
 }
