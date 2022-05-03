@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".view.MainActivity">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="30dp"
+        android:layout_height="1dp"
+        android:background="@color/deeper_blue"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/news_container"
+        app:layout_constraintTop_toBottomOf="@id/weather_container" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/current_weather_toolbar"
@@ -25,148 +34,194 @@
             tools:text="Omaha, NE" />
     </androidx.appcompat.widget.Toolbar>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/weather_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/current_weather_toolbar"
-    tools:visibility="visible">
-
-    <FrameLayout
-        android:id="@+id/frame_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/weather_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weather_location"
-        app:layout_constraintVertical_bias="0.157">
+        app:layout_constraintTop_toBottomOf="@id/current_weather_toolbar"
+        tools:visibility="visible">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/weather_background"
+        <FrameLayout
+            android:id="@+id/frame_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            tools:src="@drawable/background_color" />
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_location"
+            app:layout_constraintVertical_bias="0.157">
+
+            <TextView
+                android:id="@+id/weather_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="4dp"
+                android:textColor="@color/deeper_blue"
+                android:textSize="35sp"
+                tools:text="N" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/weather_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                tools:src="@drawable/background_color" />
+
+        </FrameLayout>
 
         <TextView
-            android:id="@+id/weather_temperature"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/weather_location"
+            style="@style/Toolbar_Text_Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="4dp"
-            android:textColor="@android:color/white"
-            android:textSize="35sp"
-            tools:text="N" />
-
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/weather_location"
-        style="@style/Toolbar_Text_Style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/frame_layout"
-        tools:text="No precipitation for at least 60 mins" />
-
-    <TextView
-        android:id="@+id/weather_desc"
-        style="@style/Dashboard_Style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/frame_layout"
-        app:layout_constraintStart_toStartOf="@+id/frame_layout"
-        app:layout_constraintTop_toBottomOf="@id/frame_layout"
-        tools:text="Partly cloudy" />
-
-    <TextView
-        android:id="@+id/wind_speed"
-        style="@style/Dashboard_Style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weather_desc"
-        tools:text="wind speed: 13mph" />
-
-    <TextView
-        android:id="@+id/wind_direction"
-        style="@style/Dashboard_Style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/weather_desc"
-        tools:text="wind direction: N" />
-
-    <TextView
-        android:id="@+id/wind_feeling"
-        style="@style/Dashboard_Style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weather_desc"
-        tools:text="Feels like -4" />
-
-    <TextView
-        android:id="@+id/weather_source"
-        style="@style/Caption_Style_Small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="Source: weatherstack"
-        app:layout_constraintTop_toBottomOf="@id/weather_desc_container" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/weather_desc_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:divider="@drawable/divider"
-        app:layout_constraintTop_toBottomOf="@id/wind_speed"
-        app:showDividers="beginning|middle|end">
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@id/frame_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="No precipitation for at least 60 mins" />
 
         <TextView
-            android:id="@+id/weather_visibility"
+            android:id="@+id/weather_desc"
             style="@style/Dashboard_Style"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/frame_layout"
+            app:layout_constraintStart_toStartOf="@+id/frame_layout"
+            app:layout_constraintTop_toBottomOf="@id/frame_layout"
+            tools:text="Partly cloudy" />
+
+        <TextView
+            android:id="@+id/wind_speed"
+            style="@style/Dashboard_Style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/wind_speed"
-            tools:text="Visibility: 16" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_desc"
+            tools:text="wind speed: 13mph" />
 
         <TextView
-            android:id="@+id/weather_humidity"
+            android:id="@+id/wind_direction"
             style="@style/Dashboard_Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="center"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/wind_speed"
-            tools:text="Humidity: 56" />
+            app:layout_constraintTop_toBottomOf="@id/weather_desc"
+            tools:text="wind direction: N" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/wind_feeling"
+            style="@style/Dashboard_Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_desc"
+            tools:text="Feels like -4" />
+
+        <TextView
+            android:id="@+id/weather_source"
+            style="@style/Caption_Style_Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Source: weatherstack"
+            app:layout_constraintTop_toBottomOf="@id/weather_desc_container" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/weather_desc_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:divider="@drawable/divider"
+            app:layout_constraintTop_toBottomOf="@id/wind_speed"
+            app:showDividers="beginning|middle|end">
+
+            <TextView
+                android:id="@+id/weather_visibility"
+                style="@style/Dashboard_Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/wind_speed"
+                tools:text="Visibility: 16" />
+
+            <TextView
+                android:id="@+id/weather_humidity"
+                style="@style/Dashboard_Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/wind_speed"
+                tools:text="Humidity: 56" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/news_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/weather_container">
+
+        <TextView
+            android:id="@+id/news_label"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Top Headline News"
+            android:textColor="@color/deeper_blue"
+            android:paddingStart="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/news_source"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Source: newsapi"
+            android:paddingStart="16dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/deeper_blue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/news_label" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/news_source"
+            tools:listitem="@layout/recyclerview_item_row" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         android:id="@+id/data_error_container"
         layout="@layout/data_error_msg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:visibility="visible"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>
